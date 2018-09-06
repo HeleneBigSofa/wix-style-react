@@ -22,6 +22,7 @@ Types of changes:
 - `<Page/>` - Add ellipsis to Header title and subtitle [#2174](https://github.com/wix/wix-style-react/pull/2174)
 - `<SideMenuDrill/>` - Add ellipsis, vertically center arrow [#2185](https://github.com/wix/wix-style-react/pull/2185)
 - `<DropdownLayout/>` - change the divider's data-hook to [#2159](https://github.com/wix/wix-style-react/pull/2159)
+- Renamed `Tags` to `MultiSelect` in storybook
 
 ## 5.1.0 - 2018-09-04
 ### Added

@@ -19,7 +19,7 @@ import ExampleReadOnlyWithError from './ExampleReadOnlyWithError';
 import ExampleReadOnlyWithErrorRaw from '!raw-loader!./ExampleReadOnlyWithError';
 
 storiesOf('3. Inputs', module)
-  .add('3.8 Tags', () => (
+  .add('3.8 MultiSelect', () => (
     <TabbedView tabs={['API', 'TestKits']}>
       <div>
         <Markdown source={Readme}/>
