@@ -10,6 +10,7 @@ const tagDriverFactory = ({element, wrapper, component}) => {
   const contentWithoutThumb = element.querySelector('span');
 
   return {
+    element: () => element,
     exists: () => !!element,
     isLarge: () => isClassExists(element, 'large'),
     isStandardTheme: () => isClassExists(element, 'standardTheme'),
@@ -17,6 +18,7 @@ const tagDriverFactory = ({element, wrapper, component}) => {
     isErrorTheme: () => isClassExists(element, 'errorTheme'),
     isRemovable: () => isClassExists(removeButton, 'tagRemoveButton'),
     removeTag: () => ReactTestUtils.Simulate.click(removeButton),
+    dragTo: otherElement => ReactTestUtils.Simulate.dragAndDrop(element, otherElement),
     click: () => ReactTestUtils.Simulate.click(element),
     isThumbExists: () => isClassExists(thumb, 'thumb'),
     isWrapped: () => isClassExists(element, 'tagWrap') && isClassExists(contentWithoutThumb, 'innerTagWrap'),
