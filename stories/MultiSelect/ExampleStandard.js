@@ -44,6 +44,7 @@ class ExampleStandard extends React.Component {
   predicate = option => this.getValue(option).toLowerCase().includes(this.state.inputValue.toLowerCase());
 
   render() {
+    const {tags} = this.state;
     return (
       <div>
         <div className={styles.main}>
@@ -51,6 +52,15 @@ class ExampleStandard extends React.Component {
             tags={this.state.tags}
             onSelect={this.handleOnSelect}
             onRemoveTag={this.handleOnRemoveTag}
+            onReorder={({addedIndex, removedIndex}) => {
+              const placeholder = tags[removedIndex];
+              tags[removedIndex] = tags[addedIndex];
+              tags[addedIndex] = placeholder;
+              this.setState({
+                tags
+              });
+              console.log(`Dragged tag ${removedIndex} to ${addedIndex}`);
+            }}
             onChange={this.handleOnChange}
             onManuallyInput={() => console.log('NOW')}
             options={this.state.options}

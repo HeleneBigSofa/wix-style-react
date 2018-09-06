@@ -341,15 +341,19 @@ describe('MultiSelect', () => {
       {label: 'California3', id: 'California3'},
       {label: 'California4', id: 'California4'}
     ];
+    const onReorder = jest.fn();
     const {driver: {getTagLabelAt, getTagDriverByTagId}} = createDriver(
       <MultiSelect
         draggable
         options={options}
         tags={tags}
+        onReorder={onReorder}
         autoFocus
         />
     );
     getTagDriverByTagId('Alabama').dragTo(getTagDriverByTagId('California3').element);
+    expect(onReorder).toBeCalled();
+
     expect(getTagLabelAt(0)).toBe('California3');
     expect(getTagLabelAt(2)).toBe('Alabama');
   });
@@ -364,7 +368,7 @@ describe('MultiSelect', () => {
           <MultiSelect
             dataHook={dataHook}
             tags={tags}
-          />
+            />
         </div>));
       const multiSelectTestkit = multiSelectTestkitFactory({wrapper, dataHook});
       expect(multiSelectTestkit.driver.exists()).toBeTruthy();

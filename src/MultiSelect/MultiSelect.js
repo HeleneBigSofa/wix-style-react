@@ -52,6 +52,8 @@ class MultiSelect extends InputWithOptions {
     return {
       inputElement: (
         <InputWithTags
+          draggable
+          onReorder={this.props.onReorder}
           maxNumRows={this.props.maxNumRows}
           mode={this.props.mode}
           />
@@ -197,7 +199,8 @@ MultiSelect.propTypes = {
   delimiters: PropTypes.array,
   mode: PropTypes.string,
   error: PropTypes.bool,
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  onReorder: PropTypes.func
 };
 
 MultiSelect.defaultProps = {

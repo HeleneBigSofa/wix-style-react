@@ -7,6 +7,7 @@ import styles from './InputWithTags.scss';
 import omit from 'omit';
 import classNames from 'classnames';
 import isUndefined from 'lodash/isUndefined';
+import SortableList from '../SortableList/SortableList';
 
 class InputWithTags extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ class InputWithTags extends React.Component {
     const {
       tags,
       onRemoveTag,
+      onReorder,
       placeholder,
       error,
       errorMessage,
@@ -65,7 +67,7 @@ class InputWithTags extends React.Component {
     const isSelectMode = mode === 'select';
 
     const className = classNames({
-      [styles.tagsContainer]: true,
+      [styles.inputWithTagsContainer]: true,
       [styles.disabled]: disabled,
       [styles.error]: error,
       [styles.empty]: !tags.length,
@@ -108,9 +110,21 @@ class InputWithTags extends React.Component {
         onMouseOver={() => this.handleHover()}
         onMouseOut={() => this.handleHover()}
         data-hook={this.props.dataHook}
-        >
-        {tags.map(({label, ...rest}) => <Tag key={rest.id} disabled={disabled} onRemove={onRemoveTag} {...rest}>{label}</Tag>)}
-        <span className={classNames(styles.input, {[styles.emptyInput]: !tags.length})} data-hook="inner-input-with-tags">
+      >
+        {/*{tags.map(({label, ...rest}) => <Tag key={rest.id} disabled={disabled} onRemove={onRemoveTag} {...rest}>{label}</Tag>)}*/}
+        <SortableList
+          contentClassName={styles.tagsContainer}
+          items={tags}
+          onDrop={onReorder}
+          renderItem={({item: {id, label, ...itemProps}, previewStyles, ...rest}) =>
+            <div style={previewStyles}>
+              <Tag id={id} disabled={disabled} onRemove={onRemoveTag} {...itemProps} {...rest}>{label}</Tag>
+            </div>
+          }
+        />
+        {/*{tags.map(({label, ...rest}) => <Tag key={rest.id} disabled={disabled} onRemove={onRemoveTag} {...rest}>{label}</Tag>)}*/}
+        <span className={classNames(styles.input, {[styles.emptyInput]: !tags.length})}
+              data-hook="inner-input-with-tags">
           <div className={styles.hiddenDiv} style={{fontSize}}>
             {this.state.inputValue}
           </div>
@@ -132,7 +146,7 @@ class InputWithTags extends React.Component {
               }
             }}
             withSelection
-            />
+          />
         </span>
 
 
@@ -143,7 +157,7 @@ class InputWithTags extends React.Component {
               status={error && 'error'}
               statusMessage={errorMessage}
               menuArrow={isSelectMode}
-              />
+            />
           </div>
         )}
       </div>
@@ -172,6 +186,7 @@ class InputWithTags extends React.Component {
 InputWithTags.propTypes = {
   onRemoveTag: PropTypes.func,
   tags: PropTypes.array,
+  onReorder: PropTypes.func,
   maxHeight: PropTypes.string,
   maxNumRows: PropTypes.number,
   onKeyDown: PropTypes.func,
@@ -190,7 +205,8 @@ InputWithTags.propTypes = {
 };
 
 InputWithTags.defaultProps = {
-  onRemoveTag: () => {},
+  onRemoveTag: () => {
+  },
   tags: [],
   placeholder: '',
   delimiters: []

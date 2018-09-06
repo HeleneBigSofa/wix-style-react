@@ -52,6 +52,7 @@ import '../stories/Dropdown/Dropdown.story.js'; // 4.1 Dropdown
 import '../stories/AutoComplete'; // 4.1 + AutoComplete
 import '../stories/AutoCompleteComposite'; // 4.1 + AutoCompleteComposite
 import '../stories/InputWithOptions'; // 4.1 + InputWithOptions
+import '../stories/InputWithTags'; // 4.1 + InputWithOptions
 import '../stories/IconWithOptions'; // 4.1 + IconWithOptions
 import '../stories/ButtonWithOptions'; // 4.1 + ButtonWithOptions
 import '../stories/DropdownComposite'; // 4.1 + DropdownComposite
